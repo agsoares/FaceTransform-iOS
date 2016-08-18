@@ -12,6 +12,8 @@
 #import <opencv2/imgcodecs/ios.h>
 #import <opencv2/videoio/cap_ios.h>
 
+#import "Detector.h"
+#import "MaskHelper.h"
 
 @interface ViewController : UIViewController<CvVideoCameraDelegate>
 

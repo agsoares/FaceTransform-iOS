@@ -8,7 +8,6 @@
 
 #import "ViewController.h"
 
-
 using namespace cv;
 using namespace std;
 
@@ -20,10 +19,12 @@ using namespace std;
 
     @property UIView *preview;
 
+    @property Detector *detector;
+
 @end
 
 @implementation ViewController {
-
+    
 
 }
 
@@ -39,6 +40,8 @@ using namespace std;
     
     [self loadVideo];
     [self setupVideoCamera];
+    
+    _detector = Detector.sharedInstance;
     // Do any additional setup after loading the view, typically from a nib.
 }
 
@@ -88,6 +91,30 @@ using namespace std;
     
     }
     cvtColor(frame, frame, CV_RGB2BGR);
+    static std::vector<cv::Point2f> landmarks;
+    static int fcount = 0;
+    if (fcount%2 == 0) {
+        landmarks = [_detector detectLandmarks:frame andIsBlocking:YES];
+    }
+    fcount ++;
+    
+    if (landmarks.size() >= 68) {
+        auto green = Scalar(0, 255, 0);
+        NSArray *triangulation = [MaskHelper triangulation];
+        for(int j = 0; j < [triangulation count]; j++ )
+        {
+            cv::Point pt[3];
+            NSArray *t = triangulation[j];
+            pt[0] = cv::Point(landmarks[[t[0] integerValue]]);
+            pt[1] = cv::Point(landmarks[[t[1] integerValue]]);
+            pt[2] = cv::Point(landmarks[[t[2] integerValue]]);
+
+            cv::line(frame, pt[0], pt[1], green, 1, CV_AA, 0);
+            cv::line(frame, pt[1], pt[2], green, 1, CV_AA, 0);
+            cv::line(frame, pt[2], pt[0], green, 1, CV_AA, 0);
+
+        }
+    }
     image = frame;
 
 }
