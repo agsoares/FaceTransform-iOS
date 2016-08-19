@@ -8,6 +8,8 @@
 
 #import "Detector.h"
 
+#define ENABLE_ASSERTS 0
+
 using namespace dlib;
 using namespace cv;
 

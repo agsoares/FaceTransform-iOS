@@ -91,28 +91,56 @@ using namespace std;
     
     }
     cvtColor(frame, frame, CV_RGB2BGR);
-    static std::vector<cv::Point2f> landmarks;
+    static std::vector<cv::Point2f> videoLandmarks;
+    static std::vector<cv::Point2f>  faceLandmarks;
     static int fcount = 0;
+    
     if (fcount%2 == 0) {
-        landmarks = [_detector detectLandmarks:frame andIsBlocking:YES];
+        videoLandmarks = [_detector detectLandmarks:frame andIsBlocking:YES];
+        UIDeviceOrientation deviceOrientation = [[UIDevice currentDevice] orientation];
+        if (deviceOrientation == UIDeviceOrientationLandscapeRight) {
+            transpose(image, image);
+            flip(image, image, 1); //transpose+flip(1)=CW
+        } else if (deviceOrientation == UIDeviceOrientationLandscapeLeft) {
+            transpose(image, image);
+            flip(image, image, 0); //transpose+flip(0)=CCW
+        }
+        faceLandmarks  = [_detector detectLandmarks:image andIsBlocking:YES];
     }
     fcount ++;
     
-    if (landmarks.size() >= 68) {
+    if (videoLandmarks.size() >= 68) {
         auto green = Scalar(0, 255, 0);
         NSArray *triangulation = [MaskHelper triangulation];
         for(int j = 0; j < [triangulation count]; j++ )
         {
             cv::Point pt[3];
             NSArray *t = triangulation[j];
-            pt[0] = cv::Point(landmarks[[t[0] integerValue]]);
-            pt[1] = cv::Point(landmarks[[t[1] integerValue]]);
-            pt[2] = cv::Point(landmarks[[t[2] integerValue]]);
+            pt[0] = cv::Point(videoLandmarks[[t[0] integerValue]]);
+            pt[1] = cv::Point(videoLandmarks[[t[1] integerValue]]);
+            pt[2] = cv::Point(videoLandmarks[[t[2] integerValue]]);
 
             cv::line(frame, pt[0], pt[1], green, 1, CV_AA, 0);
             cv::line(frame, pt[1], pt[2], green, 1, CV_AA, 0);
             cv::line(frame, pt[2], pt[0], green, 1, CV_AA, 0);
 
+        }
+    }
+    if (faceLandmarks.size() >= 68) {
+        auto red = Scalar(0, 0, 255);
+        NSArray *triangulation = [MaskHelper triangulation];
+        for(int j = 0; j < [triangulation count]; j++ )
+        {
+            cv::Point pt[3];
+            NSArray *t = triangulation[j];
+            pt[0] = cv::Point(faceLandmarks[[t[0] integerValue]]);
+            pt[1] = cv::Point(faceLandmarks[[t[1] integerValue]]);
+            pt[2] = cv::Point(faceLandmarks[[t[2] integerValue]]);
+            
+            cv::line(frame, pt[0], pt[1], red, 1, CV_AA, 0);
+            cv::line(frame, pt[1], pt[2], red, 1, CV_AA, 0);
+            cv::line(frame, pt[2], pt[0], red, 1, CV_AA, 0);
+            
         }
     }
     image = frame;
