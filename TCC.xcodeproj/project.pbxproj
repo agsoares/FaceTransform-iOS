@@ -19,6 +19,7 @@
 		B988E4851D5D21FC005CFDF6 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B988E4831D5D21FC005CFDF6 /* Main.storyboard */; };
 		B988E4871D5D21FC005CFDF6 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B988E4861D5D21FC005CFDF6 /* Assets.xcassets */; };
 		B988E48A1D5D21FC005CFDF6 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B988E4881D5D21FC005CFDF6 /* LaunchScreen.storyboard */; };
+		B9BFEB1B1D8A05A900C2FCF6 /* demo2.mov in Resources */ = {isa = PBXBuildFile; fileRef = B9BFEB1A1D8A05A900C2FCF6 /* demo2.mov */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -55,6 +56,7 @@
 		B988E4861D5D21FC005CFDF6 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		B988E4891D5D21FC005CFDF6 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		B988E48B1D5D21FC005CFDF6 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		B9BFEB1A1D8A05A900C2FCF6 /* demo2.mov */ = {isa = PBXFileReference; lastKnownFileType = video.quicktime; path = demo2.mov; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -146,6 +148,7 @@
 				B988E4861D5D21FC005CFDF6 /* Assets.xcassets */,
 				B988E48B1D5D21FC005CFDF6 /* Info.plist */,
 				B9411D8E1D5D36F9003BF1C4 /* demo.mov */,
+				B9BFEB1A1D8A05A900C2FCF6 /* demo2.mov */,
 				B988E47B1D5D21FC005CFDF6 /* main.m */,
 			);
 			path = "Supporting Files";
@@ -238,6 +241,7 @@
 				B9411D8F1D5D36F9003BF1C4 /* demo.mov in Resources */,
 				B988E4871D5D21FC005CFDF6 /* Assets.xcassets in Resources */,
 				B988E48A1D5D21FC005CFDF6 /* LaunchScreen.storyboard in Resources */,
+				B9BFEB1B1D8A05A900C2FCF6 /* demo2.mov in Resources */,
 				B988E4851D5D21FC005CFDF6 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -367,7 +371,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
@@ -406,7 +410,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = iphoneos;
 				VALIDATE_PRODUCT = YES;
@@ -452,6 +456,7 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				GCC_OPTIMIZATION_LEVEL = fast;
+				"GCC_OPTIMIZATION_LEVEL[arch=*]" = fast;
 				INFOPLIST_FILE = "TCC/Supporting Files/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = (
